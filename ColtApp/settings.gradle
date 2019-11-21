@@ -1,0 +1,2 @@
+settings.createProjectDescriptor(settings.rootProject, 'ColtAppEJB', file('../ColtAppEJB'))
+settings.createProjectDescriptor(settings.rootProject, 'ColtAppWeb', file('../ColtAppWeb'))

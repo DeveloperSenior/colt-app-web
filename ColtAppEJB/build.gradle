@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+compileJava { 
+  options.encoding = "Cp1251" 
+}
+
+dependencies {
+	compile fileTree(dir: '../ColtAppLibs/lib', include: ['*.jar'])
+}
+
+compileJava.dependsOn(clean)

@@ -1,0 +1,76 @@
+
+<!--Navbar-->
+<nav class="navbar navbar-dark">
+	<a class="navbar-brand h1-responsive" href="#">Ciudades</a>
+</nav>
+<!--/.Navbar-->
+
+<div class="d-flex  stylish-color-dark text-white">
+	<div class="card   col-sm-4 stylish-color-dark text-white">
+		<div class="card-body">
+			<form action="#">
+				<div class="form-group">
+					<label> Nombre: *</label> <input type="text" name="nombre"
+						class="form-control" required autocomplete="off">
+
+				</div>
+				<div class="form-group">
+					<label> Departamento: *</label> <input type="text"
+						name="departamento" class="form-control" required
+						autocomplete="off">
+
+				</div>
+				<div class="form-group ">
+					<label> Pais: *</label> <input type="text" name="pais"
+						class="form-control" required autocomplete="off">
+				</div>
+				<div class=" text-center">
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="consultarCiudades()">Consultar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="guardarCiudad()">Guardar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="actualizarCiudad()">Actualizar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="col-sm-8 table-wrapper-scroll-y my-custom-scrollbar  ">
+		<table class="table  table-hover stylish-color-dark text-white mb-0  ">
+			<thead>
+				<tr>
+					<th style="width: 20%;" class="text-center th-md">NOMBRE</th>
+					<th style="width: 20%;" class="text-center th-md">DEPARTAMENTO</th>
+					<th style="width: 20%;" class="text-center th-md">PA&Iacute;S</th>
+					<th style="width: 40%;" class="text-center th-sm">ACCIONES</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="ciudades.length === 0">
+					<th colspan="5" style="text-align: center;">No se encontrar&oacute;n
+						registros</th>
+				</tr>
+				<tr ng-repeat="ciudad in ciudades | orderBy : 'ciudades'">
+
+					<td style="display: none;">{{ciudad.idCiudad}}</td>
+					<td class="text-center th-md" style="width: 20%;">{{ciudad.nombre}}</td>
+					<td class="text-center th-md" style="width: 20%;">{{ciudad.departamento}}</td>
+					<td class="text-center th-md" style="width: 20%;">{{ciudad.pais}}</td>
+					<td style="width: 40%;" class="text-center th-md">
+						<button type="button" ng-click="editCiudad(ciudad)"
+							class="btn btn-warning btn-sm text-center my-0 fas fa-edit" title="Editar"></button>
+						<button type="button" ng-click="eliminarCiudad(ciudad)"
+							class="btn btn-danger btn-sm text-center my-0 fas fa-delete" title="Eliminar">X</button>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+
+
+</div>

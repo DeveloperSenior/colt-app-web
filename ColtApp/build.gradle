@@ -1,0 +1,16 @@
+apply plugin: 'ear'
+
+project.archivesBaseName = 'ColtApp'
+
+dependencies {
+	deploy project(path: ':ColtAppEJB', configuration: 'archives')
+	deploy project(path: ':ColtAppWeb', configuration: 'archives')
+    earlib (fileTree(dir: '../ColtAppLibs/lib', include: ['*.jar'])){  
+		transitive = false  
+	}
+}
+
+allprojects {
+	project.ext['commons-apache'] = fileTree(dir: '../ColtAppLibs/lib', include: ['*.jar'])
+}
+ear.dependsOn(clean)

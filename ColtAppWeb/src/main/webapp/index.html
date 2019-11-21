@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html ng-app="coltApp">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Colt App</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" id="compiled.css-css"
+	href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled-4.8.10.min.css?ver=4.8.10"
+	type="text/css" media="all">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+
+</head>
+<body class="stylish-color-dark" ng-controller="indexCtrl"
+	ng-init="onInit()">
+	<header>
+		<!--Navbar-->
+		<nav class="navbar navbar-dark default-color"
+			ng-if="snSession === 'N' ">
+			<a ng-click="onInit()" class="navbar-brand h1-responsive fas fa-cogs" href="#">COLT</a>
+			<form class="form-inline my-2 my-lg-0">
+				<a href="" class="btn btn-outline-white btn-rounded    "
+					data-toggle="modal" data-target="#modalLoginForm">Ingresar!</a>
+			</form>
+		</nav>
+		<!--/.Navbar-->
+
+		<!--Navbar -->
+		<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color"
+			ng-if="snSession === 'S' ">
+			<a ng-click="onInit()" class="navbar-brand h1-responsive fas fa-cogs" href="#">COLT</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent-333"
+				aria-controls="navbarSupportedContent-333" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administrar
+					</a>
+						<div class="dropdown-menu dropdown-default"
+							aria-labelledby="navbarDropdownMenuLink-333">
+							<a ng-click="navigateMenu('perfiles/perfiles.html',callBackPerfiles)" class="dropdown-item"
+								href="#">Perfiles</a> 
+							<a ng-click="navigateMenu('usuarios/usuarios.html',callBackUsuarios)" class="dropdown-item"
+								href="#">Usuarios</a> 
+							<a ng-click="navigateMenu('vehiculos/vehiculos.html',callBackVehiculos)" class="dropdown-item"
+								href="#">Vehiculos</a> 
+							<a ng-click="navigateMenu('ciudades/ciudades.html',callBackCiudades)" class="dropdown-item"
+								href="#">Ciudades</a> 
+							<a ng-click="navigateMenu('rutas/rutas.html',callBackRutas)" class="dropdown-item" 
+							    href="#">Rutas</a>
+						</div></li>
+				</ul>
+				<ul class="navbar-nav ml-auto nav-flex-icons">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-user"></i>
+					</a>
+						<div class="dropdown-menu dropdown-menu-right dropdown-default"
+							aria-labelledby="navbarDropdownMenuLink-333">
+							<a class="dropdown-item" href="#">{{userSession.cedula}}-{{userSession.nombre}}
+								{{userSession.apellido}}</a> <a ng-click="logout()" class="dropdown-item"
+								href="#">Cerrar sesión</a>
+						</div></li>
+				</ul>
+			</div>
+		</nav>
+		<!--/.Navbar -->
+
+	</header>
+	<div id="alert_colt"
+		class="alert alert-warning alert-dismissible fade close" role="alert">
+	</div>
+	<div class="container-fluid">
+		<!-- article: page body -->
+		<article class="page-body">
+			<div id="main-container"></div>
+		</article>
+		<!-- article: page body -->
+	</div>
+
+	<!-- Inicio Modal -->
+	<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header stylish-color-dark text-center">
+					<h4 class="modal-title text-light w-100 font-weight-bold ">Login
+						COLT</h4>
+					<button type="button" class="close font-weight-bold text-light"
+						data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body mx-3">
+					<div class="md-form mb-5">
+						<i class="fas fa-envelope prefix grey-text"></i> <input
+							ng-model="user.login" type="text" id="defaultForm-email"
+							name="usuario" class="form-control validate"
+							placeholder="Usuario" required>
+
+					</div>
+
+					<div class="md-form mb-4">
+						<i class="fas fa-lock prefix grey-text"></i> <input
+							ng-model="user.clave" type="password" id="defaultForm-pass"
+							name="clave" class="form-control validate" placeholder="Clave"
+							required>
+
+					</div>
+
+				</div>
+				<div class="modal-footer d-flex justify-content-center">
+					<button type="button" class="btn btn-default" ng-click="login()">Ingresar</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Fin Modal -->
+	<!--Inicio Footer -->
+	<footer class="page-footer font-small default-color darken-3 ">
+
+		<!-- Footer Elements -->
+		<div class="container">
+
+			<!-- Grid row-->
+			<div class="row">
+				<!-- Grid column -->
+				<div class="col-md-12">
+					<div class="mb-3 mt-3 flex-center">
+						<!-- Content -->
+						<h5 class="font-weight-bold  flex-center">Siguenos en redes
+							sociales</h5>
+					</div>
+				</div>
+				<!-- Grid column -->
+				<div class="col-md-12 mt-3 mb-1">
+					<div class="mb-4 flex-center">
+
+						<!-- Facebook -->
+						<a class="fb-ic"> <i
+							class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x">
+						</i>
+						</a>
+						<!-- Twitter -->
+						<a class="tw-ic"> <i
+							class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+						</a>
+						<!-- Google +-->
+						<a class="gplus-ic"> <i
+							class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x">
+						</i>
+						</a>
+						<!--Linkedin -->
+						<a class="li-ic"> <i
+							class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x">
+						</i>
+						</a>
+						<!--Instagram-->
+						<a class="ins-ic"> <i
+							class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x">
+						</i>
+						</a>
+						<!--Pinterest-->
+						<a class="pin-ic"> <i
+							class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+						</a>
+
+					</div>
+
+				</div>
+				<!-- Grid column -->
+
+			</div>
+			<!-- Grid row-->
+
+
+		</div>
+		<!-- Footer Elements -->
+
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-2 mt-1">
+			© 2019 Copyright: <a href="#">Ktalogs.com</a>
+		</div>
+		<!-- Copyright -->
+
+	</footer>
+	<!--Fin Footer -->
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+	<!-- Angular JS -->
+	<script type="text/javascript"
+		src="js-libs/angular-1.4.7/angular.min.js"></script>
+	<script type="text/javascript"
+		src="js-libs/bootstrap-3.2.0/js/ui-bootstrap-tpls-0.10.0.js"></script>
+	<script type="text/javascript"
+		src="js-libs/ngdialog-0.2.3/ngDialog.min.js"></script>
+	<script type="text/javascript"
+		src="js-libs/angucomplete/angucomplete.js"></script>
+
+	<!-- Scripts COLT -->
+	<script type="text/javascript" src="js-libs/colt-util.js"></script>
+	<script type="text/javascript" src="js-libs/colt-app.js"></script>
+	<script type="text/javascript" src="views/index/js/indexCtrl.js"></script>
+	<script type="text/javascript" src="views/perfiles/js/perfiles.js"></script>
+	<script type="text/javascript" src="views/usuarios/js/usuarios.js"></script>
+	<script type="text/javascript" src="views/vehiculos/js/vehiculos.js"></script>
+	<script type="text/javascript" src="views/rutas/js/rutas.js"></script>
+	<script type="text/javascript" src="views/ciudades/js/ciudades.js"></script>
+
+</body>
+
+</html>

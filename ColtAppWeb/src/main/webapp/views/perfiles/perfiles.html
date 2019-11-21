@@ -1,0 +1,76 @@
+
+<!--Navbar-->
+<nav class="navbar navbar-dark">
+	<a class="navbar-brand h1-responsive" href="#">Perfiles</a>
+</nav>
+<!--/.Navbar-->
+
+<div class="d-flex  stylish-color-dark text-white">
+	<div class="card   col-sm-4 stylish-color-dark text-white">
+		<div class="card-body">
+
+			<form action="#">
+
+				<div class="form-group mt-1 mb-3">
+					<label> Nombre: *</label> <input ng-model="perfil.nombre"
+						type="text" class="form-control my-2" required autocomplete="off">
+				</div>
+
+				<!-- Default checked -->
+				<div class="custom-control custom-checkbox my-3">
+					<input ng-model="perfil.activo" ng-true-value="'S'"
+						ng-false-value="'N'"
+						ng-checked="perfil.activo == 'S'"
+						type="checkbox" class="custom-control-input"
+						id="defaultChecked2" name="estado" unchecked required> <label
+						class="custom-control-label" for="defaultChecked2">Activo</label>
+				</div>
+
+				<div class=" text-center my-4">
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="consultarPerfil()">Consultar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="guardarPerfil()">Guardar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="actualizarPerfil()">Actualizar</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<div class="col-sm-8 table-wrapper-scroll-y my-custom-scrollbar  ">
+		<table
+			class="table  table-hover stylish-color-dark text-white mb-0 pt-2  ">
+			<thead>
+				<tr>
+					<th style="width: 25%;" class="text-center  th-md">NOMBRE</th>
+					<th style="width: 25%;" class="text-center th-md">ESTADO</th>
+					<th style="width: 50%;" class="text-center th-sm">ACCIONES</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="perfiles.length === 0">
+					<th colspan="5" style="text-align: center;">No se encontrar&oacute;n
+						registros</th>
+				</tr>
+				<tr ng-repeat="perfil in perfiles | orderBy : 'perfiles'">
+					<td class="text-center  th-md" style="display: none;">{{perfil.idPerfil}}</td>
+					<td class="text-center  th-md" style="width: 25%;">{{perfil.nombre}}</td>
+					<td class="text-center  th-md" style="width: 25%;">{{perfil.activo}}</td>
+					<td style="width: 50%;" class="text-center th-md">
+						<button type="button" ng-click="editPerfil(perfil)"
+							class="btn btn-warning btn-sm text-center my-0 fas fa-edit" title="Editar"></button>
+						<button type="button" ng-click="eliminarPerfil(perfil)"
+							class="btn btn-danger btn-sm text-center my-0 fas fa-delete" title="Eliminar">X</button>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>

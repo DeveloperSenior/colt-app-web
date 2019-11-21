@@ -1,0 +1,92 @@
+
+<!--Navbar-->
+<nav class="navbar navbar-dark">
+	<a class="navbar-brand h1-responsive" href="#">Vehiculos</a>
+</nav>
+<!--/.Navbar-->
+<div class="d-flex mt-0 stylish-color-dark text-white">
+	<div class="card mt-0  col-sm-4 stylish-color-dark text-white">
+		<div class="card-body">
+
+			<form action="#">
+
+				<div class="form-group my-3">
+					<label class="mt-0 mb-1"> Placa: *</label> <input
+						ng-model="vehiculo.placa" type="text" name="placa"
+						class="form-control" required autocomplete="off">
+
+				</div>
+				<div class="form-group my-3">
+					<label class="mt-0 mb-1"> Modelo: *</label> <input
+						ng-model="vehiculo.modelo" type="text" name="modelo"
+						class="form-control" required autocomplete="off">
+
+				</div>
+				<div class="form-group my-3">
+					<label class="mt-0 mb-1"> Capacidad: *</label> <input
+						ng-model="vehiculo.capacidad" type="text" name="capacidad"
+						class="form-control" required autocomplete="off">
+				</div>
+				<!-- Default checked -->
+				<div class="custom-control custom-checkbox my-4">
+					<input ng-model="vehiculo.seguro" ng-true-value="'S'"
+						ng-false-value="'N'" type="checkbox" class="custom-control-input"
+						id="defaultChecked2" name="seguro" unchecked required> <label
+						class="custom-control-label mb-0" for="defaultChecked2">Tiene
+						Seguro</label>
+				</div>
+
+				<div class=" text-center my-3">
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="consultarVehiculos()">Consultar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="guardarVehiculo()">Guardar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="actualizarVehiculo()">Actualizar</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<div class="col-sm-8 table-wrapper-scroll-y my-custom-scrollbar  ">
+		<table class="table  table-hover stylish-color-dark text-white mb-0  ">
+			<thead>
+				<tr>
+					<th style="width: 10%;" class="text-center  th-md">PLACA</th>
+					<th style="width: 10%;" class="text-center th-md">MODELO</th>
+					<th style="width: 10%;" class="text-center th-md">CAPACIDAD</th>
+					<th style="width: 10%;" class="text-center th-sm">SEGURO</th>
+					<th style="width: 60%;" class="text-center th-sm">ACCIONES</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="vehiculos.length === 0">
+					<th colspan="5" style="text-align: center;">No se encontraron
+						registros</th>
+				</tr>
+				<tr ng-repeat="vehiculo in vehiculos | orderBy : 'vehiculos'">
+
+					<td style="display: none;">{{vehiculo.idVehiculo}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{vehiculo.placa}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{vehiculo.modelo}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{vehiculo.capacidad}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{vehiculo.seguro}}</td>
+					<td style="width: 60%;" class="text-center th-md">
+						<button type="button" ng-click="editVehiculo(vehiculo)"
+							class="btn btn-warning btn-sm text-center my-0 fas fa-edit" title="Editar"></button>
+						<button type="button" ng-click="eliminarVehiculo(vehiculo)"
+							class="btn btn-danger btn-sm text-center my-0 fas fa-delete" title="Eliminar">X</button>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+
+
+</div>
+

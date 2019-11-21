@@ -1,0 +1,154 @@
+<!--Inicio Contenedor Principal Formulario y Tabla -->
+<!--Navbar-->
+<nav class="navbar navbar-dark">
+	<a class="navbar-brand h1-responsive" href="#">Usuarios</a>
+</nav>
+<!--/.Navbar-->
+<div class="d-flex  stylish-color-dark text-white mb-0">
+
+	<div class="card   col-sm-4 stylish-color-dark text-white">
+		<div class="card-body">
+
+			<!--Inicio Contenedor para el Formulario -->
+			<form action="#">
+
+				<label class="grey-text mb-0">Informaci&oacute;n Personal</label>
+
+
+				<div class="form-row  mb-1 ">
+					<div class="col ">
+						<!-- Cedula -->
+						<label class="mb-0"> C&eacute;dula: *</label> <input
+							ng-model="user.cedula" type="text"
+							id="defaultRegisterFormFirstName" class="form-control  "
+							name="cedula" required autocomplete="off">
+					</div>
+					<div class="col ">
+						<!-- Nombre -->
+						<label class="mb-0"> Telefono: *</label> <input
+							ng-model="user.telefono" type="text"
+							id="defaultRegisterFormLastName" class="form-control "
+							name="telefono" required autocomplete="off">
+					</div>
+				</div>
+				<div class="form-row  mb-1">
+					<div class="col">
+						<label class="mb-0"> Nombres: *</label> <input
+							ng-model="user.nombre" type="text"
+							id="defaultRegisterFormLastName" class="form-control"
+							name="nombres" required autocomplete="off">
+
+					</div>
+					<div class="col">
+						<label class="mb-0"> Apellidos: *</label> <input
+							ng-model="user.apellido" type="text"
+							id="defaultRegisterFormLastName" class="form-control"
+							name="apellidos" required autocomplete="off">
+					</div>
+				</div>
+				<div class="form-row  mb-1">
+					<div class="col">
+						<label class="mb-0"> F. Nacimiento: *</label> <input
+							ng-model="user.fechaNacimiento" type="date"
+							id="defaultRegisterFormLastName" class="form-control"
+							name="fechaNacimiento" required autocomplete="off">
+					</div>
+					<div class="col">
+						<label class="mb-0"> Sexo: *</label> <select ng-model="user.sexo"
+							class="browser-default custom-select">
+							<option selected>Seleccione Sexo</option>
+							<option value="M">Hombre</option>
+							<option value="F">Mujer</option>
+						</select>
+					</div>
+				</div>
+				<label class="grey-text mt-5 mb-0">Informaci&oacute;n de
+					Acceso</label>
+				<div class="form-row  mt-0 ">
+					<div class="col">
+						<!-- Cedula -->
+						<label class="mb-0 mt-0"> Login *</label> <input
+							ng-model="user.login" type="text"
+							id="defaultRegisterFormFirstName" class="form-control"
+							name="login" required autocomplete="off">
+					</div>
+					<div class="col">
+						<!-- Nombre -->
+						<label class="mb-0 mt-0"> Clave *</label> <input
+							ng-model="user.clave" type="text"
+							id="defaultRegisterFormLastName" class="form-control"
+							name="clave" required autocomplete="off">
+					</div>
+				</div>
+
+				<div class="form-row  mb-1">
+					<div class="col">
+						<label class="mb-0">Perfil: *</label> <select
+							ng-model="user.perfil"
+							ng-options="perfil as perfil.nombre for perfil in perfiles"
+							name="perfil" class="browser-default custom-select">
+							<option selected>Seleccione Perfil</option>
+						</select>
+					</div>
+				</div>
+
+
+
+				<div class=" text-center">
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="guardarUsuario()">Guardar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="actualizarUsuario()">Actualizar</button>
+				</div>
+			</form>
+			<!--Fin Contenedor para el Formulario -->
+		</div>
+	</div>
+
+	<!--Inicio Contenedor para la Tabla -->
+	<div class="col-sm-8 table-wrapper-scroll-y my-custom-scrollbar  ">
+		<table class="table  table-hover stylish-color-dark text-white mb-0  ">
+			<thead>
+				<tr>
+					<th style="width: 10%;" class="text-center  th-md">CEDULA</th>
+					<th style="width: 10%;" class="text-center  th-md">NOMBRES</th>
+					<th style="width: 10%;" class="text-center th-md">APELLIDOS</th>
+					<th style="width: 10%;" class="text-center th-md">F.
+						NACIMIENTO</th>
+					<th style="width: 10%;" class="text-center th-sm">TELEFONO</th>
+					<th style="width: 10%;" class="text-center th-sm">SEXO</th>
+					<th style="width: 40%;" class="text-center th-sm">ACCIONES</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="users.length === 0">
+					<th colspan="5" style="text-align: center;">No se encontrar&oacute;n
+						registros</th>
+				</tr>
+				<tr ng-repeat="usuario in users | orderBy : 'users'">
+
+					<td style="display: none;">{{usuario.idUsuario}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{usuario.cedula}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{usuario.nombre}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{usuario.apellido}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{usuario.fechaNacimiento | date:'dd-MMM-yyyy'}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{usuario.telefono}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{usuario.sexo}}</td>
+
+					<td style="width: 40%;" class="text-center th-md">
+						<button type="button" ng-click="editUser(usuario)"
+							class="btn btn-warning btn-sm text-center my-0 fas fa-edit" title="Editar"></button>
+						<button type="button" ng-click="eliminarUser(usuario)"
+							class="btn btn-danger btn-sm text-center my-0 fas fa-delete" title="Eliminar">X</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<!--Fin Contenedor para la Tabla -->
+
+</div>
+<!--Fin Contenedor Principal Formulario y Tabla -->

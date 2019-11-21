@@ -1,0 +1,103 @@
+
+<!--Inicio Contenedor Principal Formulario y Tabla -->
+<!--Navbar-->
+<nav class="navbar navbar-dark">
+	<a class="navbar-brand h1-responsive" href="#">Rutas</a>
+</nav>
+<!--/.Navbar-->
+<div class="d-flex  stylish-color-dark text-white">
+	<div class="card   col-sm-4 stylish-color-dark text-white">
+		<div class="card-body">
+
+			<!--Inicio Contenedor para el Formulario -->
+			<form action="#">
+				<div class="form-row mt-2 mb-5 ">
+					<div class="col">
+						<!-- Cedula -->
+						<label> C&oacute;digo: *</label> <input ng-model="ruta.codigo"
+							type="text" id="defaultRegisterFormFirstName"
+							class="form-control" name="codigo" required autocomplete="off">
+					</div>
+					<div class="col">
+						<!-- Nombre -->
+						<label> Descripci&oacute;n *</label> <input
+							ng-model="ruta.descripcion" type="text"
+							id="defaultRegisterFormLastName" class="form-control"
+							name="descripcion" required autocomplete="off">
+					</div>
+				</div>
+				<div class="form-row  mb-5">
+					<div class="col">
+						<label> Ciudad Origen: *</label> <select ng-model="ruta.origen"
+							ng-options="rutaOrigen as rutaOrigen.nombre for rutaOrigen in ciudades"
+							class="browser-default custom-select">
+							<option selected>Seleccione Ciudad</option>
+
+						</select>
+					</div>
+					<div class="col">
+						<label> Ciudad Destino: *</label> <select ng-model="ruta.destino"
+							ng-options="rutaDestino as rutaDestino.nombre for rutaDestino in ciudades"
+							class="browser-default custom-select">
+							<option selected>Seleccione Ciudad</option>
+
+						</select>
+					</div>
+				</div>
+				<div class=" text-center">
+				    <button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="consultarRutas()">Consultar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="guardarRuta()">Guardar</button>
+					<button type="button"
+						class="btn btn-default mb-3  btn-md text-center"
+						ng-click="actualizarRuta()">Actualizar</button>
+				</div>
+			</form>
+			<!--Fin Contenedor para el Formulario -->
+		</div>
+	</div>
+
+	<!--Inicio Contenedor para la Tabla -->
+	<div class="col-sm-8 table-wrapper-scroll-y my-custom-scrollbar  ">
+		<table class="table  table-hover stylish-color-dark text-white mb-0  ">
+			<thead>
+				<tr>
+					<th style="width: 10%;" class="text-center  th-md">CODIGO</th>
+					<th style="width: 30%;" class="text-center th-md">DESCRIPCI&Oacute;N</th>
+					<th style="width: 15%;" class="text-center th-md">CIUDAD
+						ORIGEN</th>
+					<th style="width: 15%;" class="text-center th-sm">CIUDAD
+						DESTINO</th>
+					<th style="width: 30%;" class="text-center th-sm">ACCIONES</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="rutas.length === 0">
+					<th colspan="5" style="text-align: center;">No se encontrar&oacute;n
+						registros</th>
+				</tr>
+				<tr ng-repeat="ruta in rutas | orderBy : 'rutas'">
+
+					<td style="display: none;">{{ruta.idRuta}}</td>
+					<td class="text-center th-md" style="width: 10%;">{{ruta.codigo}}</td>
+					<td class="text-center th-md" style="width: 30%;">{{ruta.descripcion}}</td>
+					<td class="text-center th-md" style="width: 15%;">{{ruta.origen.nombre}}</td>
+					<td class="text-center th-md" style="width: 15%;">{{ruta.destino.nombre}}</td>
+					<td style="width: 30%;" class="text-center th-md">
+						<button type="button" ng-click="editRuta(ruta)"
+							class="btn btn-warning btn-sm text-center my-0 fas fa-edit" title="Editar"></button>
+						<button type="button" ng-click="eliminarRuta(ruta)"
+							class="btn btn-danger btn-sm text-center my-0 fas fa-delete" title="Eliminar">X</button>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+	<!--Fin Contenedor para la Tabla -->
+
+</div>
+<!--Fin Contenedor Principal Formulario y Tabla -->
